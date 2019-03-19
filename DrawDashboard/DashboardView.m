@@ -13,6 +13,7 @@
 @interface DashboardView()
 @property (nonatomic, strong)PointerView *point;
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, assign) CGPoint p0;
 @end
 
 
@@ -41,14 +42,48 @@
     if (gesture.state == UIGestureRecognizerStateEnded) {//停止滑动
        
     }
-    CGPoint currentPosition = [gesture locationInView:self];
+      CGPoint currentPosition = [gesture locationInView:self];
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        self.p0 = currentPosition;
+    }
+    
+  
     
     if (gesture.state == UIGestureRecognizerStateChanged)
     {
         NSLog (@"[%f,%f]",currentPosition.x, currentPosition.y);
+        CGPoint p1 = currentPosition;
+        CGFloat dx = fabs(p1.x - self.p0.x);
+        CGFloat dy = fabs(p1.y - self.p0.y);
+        // 这段代码只在第一象限移动手指有意义，其它的你需要自己实现
+        CGFloat ang = M_PI_2 - atan(dy / dx);
+       // [self.point transformRotateWithAngle:ang];
+
+        self.point.transform = CGAffineTransformRotate(self.point.transform, ang);
+//
+//        CGFloat angle = [DashboardView getAnglesWithThreePoint:self.point.center pointB:self.point.layer.anchorPoint pointC:currentPosition];
         
-        CGFloat angle = [DashboardView getAnglesWithThreePoint:self.point.center pointB:self.point.layer.anchorPoint pointC:currentPosition];
-        [self.point transformRotateWithAngle:angle];
+        
+//        let p1 = gesture.location(in: view)
+//        let dx = abs(p1.x - p0.x)
+//        let dy = abs(p1.y - p0.y)
+//        var ang = atan(dy / dx)
+//        if p1.x >= p0.x && p1.y <= p0.y {  // 第一象限
+//            ang = CGFloat.pi / 2 - ang
+//        } else if p1.x > p0.x && p1.y > p0.y { // 第四象限
+//            ang = CGFloat.pi / 2 + ang
+//        } else if p1.x < p0.x && p1.y > p0.y { // 第三象限
+//            ang = CGFloat.pi * 1.5 - ang
+//        } else {
+//            ang = CGFloat.pi * 1.5 + ang  // 第二象限
+//        }
+        //arrowImage.transform = CGAffineTransform(rotationAngle: ang)
+
+        
+        
+        
+        
+        
        
     }
 }
