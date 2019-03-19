@@ -64,5 +64,27 @@
     self.transform = newTransform;
 }
 
-
+//切除范围外的不响应事件
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
+    UIBezierPath *needlePath = [UIBezierPath bezierPath];
+    CGPoint start = CGPointMake(0,  self.bounds.size.height - self.bounds.size.width/2.0);
+    CGPoint bottomcenter = CGPointMake(self.bounds.size.width/2.0, self.bounds.size.height - self.bounds.size.width/2.0);
+    [needlePath moveToPoint:start];
+    [needlePath addArcWithCenter:bottomcenter radius:self.bounds.size.width/2.0 startAngle:M_PI endAngle:0 clockwise:NO];
+    
+    CGPoint topCenter = CGPointMake(self.bounds.size.width/2.0, self.bounds.size.width/2.0);
+    
+    [needlePath addArcWithCenter:topCenter radius:self.bounds.size.width/2.0 - self.bounds.size.width/4.0 startAngle:0 endAngle:M_PI clockwise:NO];
+    
+    
+    [needlePath addLineToPoint:start];
+    
+    [needlePath stroke];
+    
+    BOOL b = CGPathContainsPoint(needlePath.CGPath, NULL, point, YES);
+    if (b) {
+        return YES;
+    }else
+        return NO;
+}
 @end

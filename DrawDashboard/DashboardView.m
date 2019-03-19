@@ -8,6 +8,7 @@
 
 #import "DashboardView.h"
 #import "PointerView.h"
+#define pointRotatedAroundAnchorPoint(point,anchorPoint,angle) CGPointMake((point.x-anchorPoint.x)*cos(angle) - (point.y-anchorPoint.y)*sin(angle) + anchorPoint.x, (point.x-anchorPoint.x)*sin(angle) + (point.y-anchorPoint.y)*cos(angle)+anchorPoint.y)
 
 @interface DashboardView()
 @property (nonatomic, strong)PointerView *point;
@@ -35,7 +36,7 @@
     [point addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)]];
  }
 
-- (void) handlePan: (UIPanGestureRecognizer *) gesture
+- (void)handlePan: (UIPanGestureRecognizer *) gesture
 {  //SYLog(@"手势状态%ld",gesture.state);
     if (gesture.state == UIGestureRecognizerStateEnded) {//停止滑动
        
@@ -44,15 +45,44 @@
     
     if (gesture.state == UIGestureRecognizerStateChanged)
     {
-                NSLog (@"[%f,%f]",currentPosition.x, currentPosition.y);
-       // self.currentRadian = [self calculateRadian:currentPosition];
+        NSLog (@"[%f,%f]",currentPosition.x, currentPosition.y);
         
-        [self setNeedsDisplay];
-        //根据角度计算value
-       // [self countValue];
-        //返回value
+        CGFloat angle = [DashboardView getAnglesWithThreePoint:self.point.center pointB:self.point.layer.anchorPoint pointC:currentPosition];
+        [self.point transformRotateWithAngle:angle];
+       
     }
 }
 
++ (CGFloat)getAnglesWithThreePoint:(CGPoint)pointA pointB:(CGPoint)pointB pointC:(CGPoint)pointC {
+    
+    CGFloat x1 = pointA.x - pointB.x;
+    CGFloat y1 = pointA.y - pointB.y;
+    CGFloat x2 = pointC.x - pointB.x;
+    CGFloat y2 = pointC.y - pointB.y;
+    
+    CGFloat x = x1 * x2 + y1 * y2;
+    CGFloat y = x1 * y2 - x2 * y1;
+    
+    CGFloat angle = acos(x/sqrt(x*x+y*y));
+    
+    return angle;
+}
+
+
+//切除范围外的不响应事件
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRect:self.point.layer.frame];
+    
+ 
+    BOOL b = CGPathContainsPoint(maskPath.CGPath, NULL, point, YES);
+    if (b) {
+        return YES;
+    }else
+        return NO;
+}
 
 @end
+
+
+
+
