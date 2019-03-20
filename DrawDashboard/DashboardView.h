@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DashboardView : UIView
-@property (nonatomic) int value;
+@property (nonatomic, assign) CGFloat lineWith;
+@property (nonatomic, assign) CGFloat proess;
 @end
 
 NS_ASSUME_NONNULL_END
