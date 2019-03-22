@@ -19,7 +19,8 @@
    
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor grayColor];
+       // self.backgroundColor = [UIColor grayColor];
+        self.backgroundColor = [UIColor clearColor];
         self.layer.anchorPoint = CGPointMake(0.5, 1);
         self.frame = frame;
     }
@@ -58,11 +59,19 @@
 - (void)transformRotateWithAngle:(CGFloat)angle{
 //    CGFloat radius = atan2f(self.transform.b, self.transform.a);
 //    CGFloat degree = radius * (360/ M_PI);
+ 
     
     CGAffineTransform currentTransform = self.transform;
     CGAffineTransform newTransform = CGAffineTransformRotate(currentTransform, angle);
     self.transform = newTransform;
 }
+
+- (void)transformMakeRotateWithAngle:(CGFloat)angle{
+    self.transform = CGAffineTransformIdentity;
+    self.transform = CGAffineTransformMakeRotation(angle);
+}
+
+
 
 //切除范围外的不响应事件
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{

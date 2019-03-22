@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PointerView : UIView
 - (void)transformRotateWithAngle:(CGFloat)angle;
+- (void)transformMakeRotateWithAngle:(CGFloat)angle;
 @end
 
 NS_ASSUME_NONNULL_END
