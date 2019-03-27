@@ -84,6 +84,7 @@ static const CGFloat CUTOFF  =  M_PI_2 / 6;
     _backLayer.path = [path CGPath];
     _backLayer.strokeEnd = 0;
     
+    //添加渐变色
     _gradientLayer = [CALayer layer];
     CAGradientLayer *gradientLayerLeft = [CAGradientLayer layer];
     gradientLayerLeft.frame = CGRectMake(0, 0, self.frame.size.width/2.0, self.frame.size.height);
@@ -109,12 +110,7 @@ static const CGFloat CUTOFF  =  M_PI_2 / 6;
     [_gradientLayer setMask:_backLayer];
     [self.layer addSublayer:_gradientLayer];
     
-//   CAShapeLayer  *layer = [CAShapeLayer layer];
-//    layer.path = self.roundPath.CGPath;
-//    layer.fillColor = [[UIColor clearColor] CGColor];
-//    layer.strokeColor = [UIColor blackColor].CGColor; //填充色
-//
-//    [self.layer addSublayer:layer];
+ 
    
 }
 

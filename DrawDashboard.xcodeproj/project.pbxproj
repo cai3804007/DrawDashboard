@@ -17,7 +17,6 @@
 		14385DBA223F700D0024C41F /* DrawDashboardUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14385DB9223F700D0024C41F /* DrawDashboardUITests.m */; };
 		14385DC9223F702D0024C41F /* DashboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14385DC8223F702D0024C41F /* DashboardView.m */; };
 		14385DCE223F89150024C41F /* PointerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14385DCD223F89150024C41F /* PointerView.m */; };
-		14385DD1223FA3220024C41F /* ImagHandlerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14385DD0223FA3220024C41F /* ImagHandlerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,8 +57,6 @@
 		14385DC8223F702D0024C41F /* DashboardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DashboardView.m; sourceTree = "<group>"; };
 		14385DCC223F89150024C41F /* PointerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PointerView.h; sourceTree = "<group>"; };
 		14385DCD223F89150024C41F /* PointerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PointerView.m; sourceTree = "<group>"; };
-		14385DCF223FA3220024C41F /* ImagHandlerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImagHandlerView.h; sourceTree = "<group>"; };
-		14385DD0223FA3220024C41F /* ImagHandlerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagHandlerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,8 +115,6 @@
 				14385DC8223F702D0024C41F /* DashboardView.m */,
 				14385DCC223F89150024C41F /* PointerView.h */,
 				14385DCD223F89150024C41F /* PointerView.m */,
-				14385DCF223FA3220024C41F /* ImagHandlerView.h */,
-				14385DD0223FA3220024C41F /* ImagHandlerView.m */,
 				14385D9B223F700B0024C41F /* Main.storyboard */,
 				14385D9E223F700D0024C41F /* Assets.xcassets */,
 				14385DA0223F700D0024C41F /* LaunchScreen.storyboard */,
@@ -282,7 +277,6 @@
 				14385DA5223F700D0024C41F /* main.m in Sources */,
 				14385D97223F700B0024C41F /* AppDelegate.m in Sources */,
 				14385DCE223F89150024C41F /* PointerView.m in Sources */,
-				14385DD1223FA3220024C41F /* ImagHandlerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
