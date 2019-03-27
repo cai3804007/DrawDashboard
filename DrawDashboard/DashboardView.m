@@ -41,14 +41,14 @@ static const CGFloat CUTOFF  =  M_PI_2 / 6;
     if (self = [super initWithFrame:frame]) {
         [self configPointView];
         [self configBgColor];
-        //[self.point transformRotateWithAngle: -(M_PI_4 * 3)];
+        [self.point transformRotateWithAngle: -(M_PI_4 * 3)];
     }
     return self;
 }
 
 - (void)configPointView{
     CGFloat dashboardWith = self.frame.size.width/2.0;
-    CGFloat pointWidth = 2;
+    CGFloat pointWidth = 10;
     PointerView *point = [[PointerView alloc]initWithFrame:CGRectMake(dashboardWith - pointWidth/2.0, 15, pointWidth, dashboardWith - 15)];
     [self addSubview:point];
     _point = point;
@@ -109,21 +109,18 @@ static const CGFloat CUTOFF  =  M_PI_2 / 6;
     [_gradientLayer setMask:_backLayer];
     [self.layer addSublayer:_gradientLayer];
     
-   CAShapeLayer  *layer = [CAShapeLayer layer];
-    layer.path = self.roundPath.CGPath;
-    layer.fillColor = [[UIColor clearColor] CGColor];
-    layer.strokeColor = [UIColor blackColor].CGColor; //填充色
-
-    [self.layer addSublayer:layer];
+//   CAShapeLayer  *layer = [CAShapeLayer layer];
+//    layer.path = self.roundPath.CGPath;
+//    layer.fillColor = [[UIColor clearColor] CGColor];
+//    layer.strokeColor = [UIColor blackColor].CGColor; //填充色
+//
+//    [self.layer addSublayer:layer];
    
 }
 
 -(void)setProess:(CGFloat)proess{
-    CGFloat angle = proess - _proess;
     _proess = proess;
     self.backLayer.strokeEnd = proess;
-    [self.point transformRotateWithAngle: (M_PI_2 * 3) *angle];
-    
 }
 
 -(CGFloat)lineWith{
@@ -167,9 +164,7 @@ static const CGFloat CUTOFF  =  M_PI_2 / 6;
         CGPoint line1End = CGPointMake(self.frame.size.width/2.0, 0);
         
         CGFloat angle = angleBetweenLines(line1Start, line1End,line1Start, location);
-//          CGFloat angle =  [self getAnglesWithThreePointsP1:line1End  p2:line1Start p3:location];
-        
-        NSLog(@"%f",angle);
+      
         
         if (angle > 135) {
             angle = 135;
@@ -180,6 +175,9 @@ static const CGFloat CUTOFF  =  M_PI_2 / 6;
         CGFloat radian = SK_DEGREES_TO_RADIANS(angle * direction);
         
         [self.point transformMakeRotateWithAngle:radian];
+        self.proess = 0.5 + ((135 -angle)/135.0) * direction * 0.5;
+        self.proess = angle/135.0 * direction * 0.5 + 0.5;
+          NSLog(@"angle ====== %f   proess ====== %f",angle,self.proess);
     }
 }
 
